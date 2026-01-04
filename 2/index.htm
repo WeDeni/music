@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Музыка</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #eeeeee;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #000000;
+    }
+
+    .player {
+        width: 1000px;
+        margin: 25px;
+        text-align: center;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 16px 40px;
+        margin: 10px;
+        border: none;
+        border-radius: 50px;
+        background: #000000;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    button:active {
+        opacity: 0.8;
+    }
+
+    input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 4px;
+        background: #bbb;
+        border-radius: 2px;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        background: #222;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background: #222;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-track {
+        background: #bbb;
+        height: 4px;
+    }
+
+    #time {
+        font-size: 14px;
+        opacity: 0.6;
+        margin-top: 6px;
+    }
+    .wrapper {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .card {
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+    }
+    h1 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 0.5em;
+    }
+    p {
+        font-size: 0.95rem;
+        opacity: 0.7;
+        margin-bottom: 2em;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="player">
+    <div class="wrapper">
+        <div class="card">
+            <h1>Колыбельная</h1>
+            <p>Алёна Сигова</p>
+        </div>
+    </div>
+    <input id="seek" type="range" min="0" max="100" value="0">
+    <div id="time">0:00 / 0:00</div>
+    <button id="play">▶</button>
+
+    <button id="mute">🔊</button>
+
+    <audio id="audio" preload="none">
+        <source src="Колыбельная.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+const audio = document.getElementById('audio');
+const time = document.getElementById('time');
+const playBtn = document.getElementById('play');
+const muteBtn = document.getElementById('mute');
+const seek = document.getElementById('seek');
+
+function fmt(t) {
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return m + ':' + s;
+}
+
+audio.addEventListener('timeupdate', () => {
+    seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+    time.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration || 0)}`;
+});
+
+playBtn.onclick = () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸';
+    } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+    }
+};
+
+muteBtn.onclick = () => {
+    audio.muted = !audio.muted;
+    muteBtn.textContent = audio.muted ? '🔇' : '🔊';
+};
+
+audio.addEventListener('timeupdate', () => {
+    seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+});
+
+seek.oninput = () => {
+    audio.currentTime = (seek.value / 100) * audio.duration;
+};
+</script>
+
+</body>
+</html>
