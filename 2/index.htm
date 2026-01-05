@@ -16,8 +16,16 @@
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: #ffffff;
     }
-
-
+    h1 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 0.5em;
+    }
+    p {
+        font-size: 0.95rem;
+        opacity: 0.7;
+        margin-bottom: 2em;
+    }
     button {
         width: 56px;
         height: 56px;
@@ -31,19 +39,12 @@
         justify-content: center;
         position: relative;
     }
-
     button:hover {
         background: #111;
     }
-
     button:active {
         transform: scale(0.96);
     }
-
-    button {
-        position: relative;
-    }
-
     input[type="range"] {
         -webkit-appearance: none;
         width: 100%;
@@ -51,7 +52,6 @@
         background: #333;
         border-radius: 1px;
     }
-
     input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 14px;
@@ -60,38 +60,32 @@
         border-radius: 50%;
         cursor: pointer;
     }
-
     input[type="range"]::-moz-range-thumb {
         width: 14px;
         height: 14px;
         background: #fff;
         border-radius: 50%;
     }
-
     #time {
         font-size: 14px;
         opacity: 0.6;
         margin-top: 6px;
     }
-
     .wrapper {
         min-height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
     .card {
             max-width: 420px;
             width: 90%;
             text-align: center;
     }
-
     .player {
         width: 420px;
         text-align: center;
     }
-
     .play::before {
         content: "";
         width: 0;
@@ -101,7 +95,6 @@
         border-bottom: 8px solid transparent;
         margin-left: 2px;
     }
-
     .pause::before,
     .pause::after {
         content: "";
@@ -110,11 +103,9 @@
         background: #fff;
         display: inline-block;
     }
-
     .pause::before {
         margin-right: 4px;
     }
-
     .volume::before {
         content: "";
         width: 8px;
@@ -122,7 +113,6 @@
         background: #fff;
         clip-path: polygon(0 30%, 40% 30%, 70% 0, 70% 100%, 40% 70%, 0 70%);
     }
-
     .muted::after {
         content: "";
         width: 14px;
@@ -131,7 +121,6 @@
         position: absolute;
         transform: rotate(-45deg);
     }
-
 </style>
 </head>
 
@@ -199,4 +188,5 @@ seek.oninput = () => {
 </script>
 
 </body>
+
 </html>
